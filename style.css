@@ -7,21 +7,53 @@ body {
 }
 
 #app {
-	width: 70%;
+	flex: 2;
 	background: #206cb3;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
+	user-select: none;
 }
 
 .score {
 	flex: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: start;
-	align-items: center;
+	text-align: center;
 	background-color: #fafafa;
+	user-select: none;
+	overflow-y: auto;
+	min-width: 300px;
+}
+
+.score ul {
+	text-align: center;
+	list-style-type: none;
+	padding: 0px;
+	font-size: 18px;
+}
+
+.score li {
+	margin: 10px;
+	display: flex;
+	padding: 4px 6px;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid #ccc;
+	border-radius: 7px;
+	font-family: Arial, sans-serif;
+	white-space: nowrap;
+	box-shadow: #ccc 2px 2px 5px;
+}
+
+.spanName {
+	text-align: start;
+	width: 70%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.spanScore {
+	margin-left: 2px;
 }
 
 .name {

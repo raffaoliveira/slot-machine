@@ -4,6 +4,10 @@ function slotMachine() {
 	const doors = document.querySelectorAll(".door");
 	let resultTemp = [];
 
+	const gameState = {
+		isSpinning: false,
+	};
+
 	document.querySelector("#spinner")?.addEventListener("click", spin);
 
 	function init(firstInit = true, groups = 1, duration = 1) {
@@ -88,20 +92,36 @@ function slotMachine() {
 		}, 1000);
 	}
 
+	function createListItem(name, result) {
+		const li = document.createElement("li");
+		const nameSpan = document.createElement("span");
+		nameSpan.classList.add("spanName");
+		nameSpan.textContent = name;
+
+		const resultSpan = document.createElement("span");
+		resultSpan.classList.add("spanScore");
+		resultSpan.textContent = result;
+
+		li.appendChild(nameSpan);
+		li.appendChild(resultSpan);
+
+		return li;
+	}
+
 	function addResultOnList(name, result) {
 		const ul = document.querySelector("#result");
-		const li = document.createElement("li");
-		li.textContent = `${name}: ${result}`;
-		ul.appendChild(li);
+		const li = createListItem(name, result);
+		ul.prepend(li);
 	}
 
 	async function showResults() {
 		const data = JSON.parse(localStorage.getItem("slotMachine")) || [];
+		const reversedData = data.reverse();
 		const results = document.querySelector("#result");
-		results.innerHTML = "";
-		for (const { name, result } of data) {
-			const li = document.createElement("li");
-			li.textContent = `${name}: ${result}`;
+		results.textContent = "";
+
+		for (const { name, result } of reversedData) {
+			const li = createListItem(name, result);
 			results.appendChild(li);
 		}
 	}
@@ -133,10 +153,6 @@ function slotMachine() {
 			gameState.isSpinning = false;
 		}
 	}
-
-	const gameState = {
-		isSpinning: false,
-	};
 
 	function shuffle([...arr]) {
 		let m = arr.length;
