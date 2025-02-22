@@ -9,6 +9,9 @@ function slotMachine() {
 	};
 
 	document.querySelector("#spinner")?.addEventListener("click", spin);
+	document.addEventListener("keydown", (event) => {
+		if (event.key === "Enter") spin();
+	});
 
 	function init(firstInit = true, groups = 1, duration = 1) {
 		document.addEventListener("DOMContentLoaded", showResults);
