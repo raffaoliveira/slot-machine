@@ -1,5 +1,42 @@
 function slotMachine() {
-	const items = ["🐮", "🐄", "🥛", "🧀", "🚜", "🌞"];
+	const items = [
+		"🐮",
+		"🐄",
+		"🥛",
+		"🧀",
+		"🚜",
+		"🌞",
+		"🐮",
+		"🐄",
+		"🥛",
+		"🧀",
+		"🚜",
+		"🌞",
+		"🐮",
+		"🐄",
+		"🥛",
+		"🧀",
+		"🚜",
+		"🌞",
+		"🐮",
+		"🐄",
+		"🥛",
+		"🧀",
+		"🚜",
+		"🌞",
+		"🐮",
+		"🐄",
+		"🥛",
+		"🧀",
+		"🚜",
+		"🌞",
+		"🐮",
+		"🐄",
+		"🥛",
+		"🧀",
+		"🚜",
+		"🌞",
+	];
 
 	const doors = document.querySelectorAll(".door");
 	let resultTemp = [];
@@ -13,7 +50,7 @@ function slotMachine() {
 		if (event.key === "Enter") spin();
 	});
 
-	function init(firstInit = true, groups = 1, duration = 1) {
+	function init(firstInit = true, groups = 1) {
 		document.addEventListener("DOMContentLoaded", showResults);
 		for (const door of doors) {
 			if (firstInit) {
@@ -75,7 +112,7 @@ function slotMachine() {
 				boxesClone.appendChild(box);
 			}
 
-			boxesClone.style.transitionDuration = `${duration > 0 ? duration : 1}s`;
+			boxesClone.style.transitionDuration = "6s";
 			boxesClone.style.transform = `translateY(-${door.clientHeight * (pool.length - 1)}px)`;
 			door.replaceChild(boxesClone, boxes);
 		}
@@ -92,7 +129,7 @@ function slotMachine() {
 		setTimeout(() => {
 			init();
 			name.value = "";
-		}, 1000);
+		}, 1200);
 	}
 
 	function createListItem(name, result) {
@@ -140,7 +177,7 @@ function slotMachine() {
 		}
 		gameState.isSpinning = true;
 		resultTemp = [];
-		init(false, 1, 2);
+		init(false, 1);
 		try {
 			for (const door of doors) {
 				const boxes = door.querySelector(".boxes");
@@ -148,7 +185,7 @@ function slotMachine() {
 
 				const duration = Number.parseInt(boxes.style.transitionDuration);
 				boxes.style.transform = "translateY(0)";
-				await new Promise((resolve) => setTimeout(resolve, duration * 100));
+				await new Promise((resolve) => setTimeout(resolve, duration * 200));
 			}
 			gameState.isSpinning = false;
 		} catch (error) {
